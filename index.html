@@ -441,7 +441,7 @@
   //  !! REPLACE THIS URL WITH YOUR DEPLOYED GOOGLE APPS SCRIPT URL !!
   //  Deploy → New deployment → Web app → Anyone → Deploy → copy URL
   // ─────────────────────────────────────────────────────────────────
-  const BACKEND_URL = "https://script.google.com/macros/s/AKfycbyG_o_qH1895N38aPRFx7GMjmR1Y6aHykUgzNryCTiMu2N5-HVF7knjxZSWVuy_kvKs/exec";
+  const BACKEND_URL = "YOUR_GAS_DEPLOYED_WEB_APP_URL_HERE";
 
   // Star hint labels
   const HINTS = { 1:"Terrible 😞", 2:"Poor 😕", 3:"Average 😐", 4:"Good 😊", 5:"Excellent 🤩" };
@@ -468,10 +468,15 @@
     btn.querySelector('.btn-text').textContent = 'Submitting…';
 
     try {
+      // GAS requires form-encoded POST (not JSON) for CORS to work from external domains
+      const formData = new FormData();
+      formData.append('name',   name);
+      formData.append('phone',  phone);
+      formData.append('rating', ratingEl.value);
+
       const res = await fetch(BACKEND_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, rating: ratingEl.value })
+        body: formData
       });
 
       const data = await res.json();
