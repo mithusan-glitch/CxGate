@@ -8,9 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
-    /* ── REPLACE THIS WITH YOUR DEPLOYED GAS URL ── */
-    /* See BACKEND_URL in the <script> section below */
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -40,7 +37,6 @@
       overflow-x: hidden;
     }
 
-    /* Decorative background blobs */
     body::before, body::after {
       content: '';
       position: fixed;
@@ -82,7 +78,6 @@
       to   { opacity: 1; transform: none; }
     }
 
-    /* ── HEADER ── */
     .header { text-align: center; margin-bottom: 2.4rem; }
 
     .logo-ring {
@@ -126,7 +121,6 @@
       margin: 1.6rem 0 2rem;
     }
 
-    /* ── FIELDS ── */
     .field { margin-bottom: 1.4rem; }
 
     .label {
@@ -171,7 +165,6 @@
 
     input::placeholder { color: #c2bdb5; font-size: 0.88rem; }
 
-    /* ── STARS ── */
     .star-label {
       display: block;
       font-size: 0.82rem;
@@ -209,20 +202,15 @@
       color: var(--star-on);
     }
 
-    /* Selected star gets a little pop */
-    .stars input:checked + label {
-      transform: scale(1.12);
-    }
+    .stars input:checked + label { transform: scale(1.12); }
 
     .star-hint {
       font-size: 0.75rem;
       color: var(--muted);
       margin-top: 0.5rem;
       min-height: 1.1em;
-      transition: opacity 0.2s;
     }
 
-    /* ── SUBMIT BUTTON ── */
     .btn {
       width: 100%;
       margin-top: 1.8rem;
@@ -265,7 +253,6 @@
       box-shadow: none;
     }
 
-    /* Spinner inside button */
     .btn .spinner {
       display: none;
       width: 16px; height: 16px;
@@ -282,7 +269,6 @@
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ── TOAST MESSAGES ── */
     .toast {
       display: none;
       margin-top: 1.2rem;
@@ -297,19 +283,12 @@
 
     @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; } }
 
-    .toast.success {
-      background: #f0faf4;
-      color: #166534;
-      border: 1px solid #bbf7d0;
-    }
-
     .toast.error {
       background: #fef2f2;
       color: #991b1b;
       border: 1px solid #fecaca;
     }
 
-    /* ── THANK YOU STATE ── */
     .thankyou {
       display: none;
       text-align: center;
@@ -354,7 +333,6 @@
       margin-top: 0.6rem;
     }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 500px) {
       .card { padding: 2.2rem 1.4rem 2.4rem; border-radius: 1rem; }
       .header h1 { font-size: 1.7rem; }
@@ -366,44 +344,39 @@
 
 <div class="card">
 
-  <!-- HEADER -->
   <div class="header">
-    <div class="logo-ring">⭐</div>
+    <div class="logo-ring">&#11088;</div>
     <h1>How was your<br/><em>experience?</em></h1>
     <p>Your feedback helps us serve you better.<br/>It only takes 10 seconds.</p>
   </div>
 
   <div class="rule"></div>
 
-  <!-- FORM -->
   <form id="feedbackForm">
 
-    <!-- Name (optional) -->
     <div class="field">
       <label class="label" for="name">Your Name <span class="opt">(optional)</span></label>
       <input type="text" id="name" placeholder="e.g. Sarah M." autocomplete="name"/>
     </div>
 
-    <!-- Phone (required) -->
     <div class="field">
       <label class="label" for="phone">Phone Number</label>
       <input type="tel" id="phone" placeholder="e.g. 0771234567" autocomplete="tel" inputmode="tel" required/>
     </div>
 
-    <!-- Stars (required) -->
     <div class="field">
       <span class="star-label">Rate your experience</span>
       <div class="stars" id="starGroup">
         <input type="radio" id="s5" name="rating" value="5"/>
-        <label for="s5" title="Excellent">★</label>
+        <label for="s5" title="Excellent">&#9733;</label>
         <input type="radio" id="s4" name="rating" value="4"/>
-        <label for="s4" title="Good">★</label>
+        <label for="s4" title="Good">&#9733;</label>
         <input type="radio" id="s3" name="rating" value="3"/>
-        <label for="s3" title="Average">★</label>
+        <label for="s3" title="Average">&#9733;</label>
         <input type="radio" id="s2" name="rating" value="2"/>
-        <label for="s2" title="Poor">★</label>
+        <label for="s2" title="Poor">&#9733;</label>
         <input type="radio" id="s1" name="rating" value="1"/>
-        <label for="s1" title="Terrible">★</label>
+        <label for="s1" title="Terrible">&#9733;</label>
       </div>
       <div class="star-hint" id="starHint">Tap a star to rate</div>
     </div>
@@ -415,123 +388,99 @@
 
   </form>
 
-  <!-- Toast for errors -->
   <div class="toast" id="toastBox"></div>
 
-  <!-- Thank-you state (shown after low-rating submit) -->
   <div class="thankyou" id="thankyouBox">
-    <div class="big-icon">🙏</div>
+    <div class="big-icon">&#128591;</div>
     <h2>Thank you!</h2>
     <p>We appreciate your honest feedback.<br/>Our team will be in touch soon.</p>
   </div>
 
-  <!-- Redirect countdown (shown for 4–5 star) -->
   <div class="thankyou" id="redirectBox">
-    <div class="big-icon">🌟</div>
+    <div class="big-icon">&#127775;</div>
     <h2>Wonderful!</h2>
-    <p>Thank you for the great rating.<br/>Taking you to share your review…</p>
+    <p>Thank you for the great rating.<br/>Taking you to share your review&hellip;</p>
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-    <p class="redirect-note" id="redirectNote">Redirecting in 3s…</p>
+    <p class="redirect-note" id="redirectNote">Redirecting in 3s&hellip;</p>
   </div>
 
 </div>
 
 <script>
-  // ─────────────────────────────────────────────────────────────────
-  //  !! REPLACE THIS URL WITH YOUR DEPLOYED GOOGLE APPS SCRIPT URL !!
-  //  Deploy → New deployment → Web app → Anyone → Deploy → copy URL
-  // ─────────────────────────────────────────────────────────────────
+  // =============================================================
+  //  EDIT ONLY THESE TWO LINES
+  // =============================================================
   const BACKEND_URL = "https://script.google.com/macros/s/AKfycbz8-jCp5nIH8vBm7Vnd2mY16Avsp65xniS674QoQCD_TpUF-s_VcoIScC3rXwt6HsZf/exec";
+  const REVIEW_URL  = "https://www.tripadvisor.com/UserReviewEdit-g187895-d16796242-The_Best_tour_in_Florence_Renaissance_Medici_Tales_guided_by_a_STORYTELLER-Florence_Tuscany.html";
+  // =============================================================
 
-  // Star hint labels
-  const HINTS = { 1:"Terrible 😞", 2:"Poor 😕", 3:"Average 😐", 4:"Good 😊", 5:"Excellent 🤩" };
-  document.querySelectorAll('input[name="rating"]').forEach(r => {
-    r.addEventListener('change', () => {
+  const HIGH_RATING = 4; // 4 or 5 stars → redirect to review
+
+  const HINTS = { 1:"Terrible", 2:"Poor", 3:"Average", 4:"Good", 5:"Excellent" };
+  document.querySelectorAll('input[name="rating"]').forEach(function(r) {
+    r.addEventListener('change', function() {
       document.getElementById('starHint').textContent = HINTS[r.value] || '';
     });
   });
 
-  document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
+  document.getElementById('feedbackForm').addEventListener('submit', function(e) {
     e.preventDefault();
     clearToast();
 
-    const name   = document.getElementById('name').value.trim();
-    const phone  = document.getElementById('phone').value.trim();
-    const ratingEl = document.querySelector('input[name="rating"]:checked');
+    var name     = document.getElementById('name').value.trim();
+    var phone    = document.getElementById('phone').value.trim();
+    var ratingEl = document.querySelector('input[name="rating"]:checked');
 
     if (!phone)    { showToast('Please enter your phone number.', 'error'); return; }
     if (!ratingEl) { showToast('Please select a star rating.', 'error'); return; }
 
-    const btn = document.getElementById('submitBtn');
+    var rating = parseInt(ratingEl.value);
+    var btn    = document.getElementById('submitBtn');
     btn.disabled = true;
     btn.classList.add('loading');
-    btn.querySelector('.btn-text').textContent = 'Submitting…';
+    btn.querySelector('.btn-text').textContent = 'Submitting...';
 
-    try {
-      // GAS requires form-encoded POST (not JSON) for CORS to work from external domains
-      const formData = new FormData();
-      formData.append('name',   name);
-      formData.append('phone',  phone);
-      formData.append('rating', ratingEl.value);
+    // Save to sheet in background — fire and forget
+    var formData = new FormData();
+    formData.append('name',   name);
+    formData.append('phone',  phone);
+    formData.append('rating', ratingEl.value);
+    fetch(BACKEND_URL, { method: 'POST', body: formData }).catch(function() {});
 
-      const res = await fetch(BACKEND_URL, {
-        method: 'POST',
-        body: formData
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
-        document.getElementById('feedbackForm').style.display = 'none';
-
-        if (data.redirect) {
-          // High rating → countdown then redirect
-          const box = document.getElementById('redirectBox');
-          box.style.display = 'block';
-          const fill = document.getElementById('progressFill');
-          const note = document.getElementById('redirectNote');
-          let elapsed = 0;
-          const total = 3000; // 3 seconds
-          const interval = setInterval(() => {
-            elapsed += 50;
-            fill.style.width = (elapsed / total * 100) + '%';
-            const remaining = Math.ceil((total - elapsed) / 1000);
-            note.textContent = 'Redirecting in ' + remaining + 's…';
-            if (elapsed >= total) {
-              clearInterval(interval);
-              window.location.href = data.redirect;
-            }
-          }, 50);
-        } else {
-          // Low rating → thank you message
-          document.getElementById('thankyouBox').style.display = 'block';
+    if (rating >= HIGH_RATING) {
+      // HIGH rating — show countdown, then redirect
+      document.getElementById('feedbackForm').style.display = 'none';
+      document.getElementById('redirectBox').style.display  = 'block';
+      var fill    = document.getElementById('progressFill');
+      var note    = document.getElementById('redirectNote');
+      var elapsed = 0;
+      var total   = 3000;
+      var interval = setInterval(function() {
+        elapsed += 50;
+        fill.style.width = (elapsed / total * 100) + '%';
+        var remaining = Math.ceil((total - elapsed) / 1000);
+        note.textContent = 'Redirecting in ' + remaining + 's...';
+        if (elapsed >= total) {
+          clearInterval(interval);
+          window.location.href = REVIEW_URL;
         }
-      } else {
-        showToast('Error: ' + (data.error || 'Something went wrong.'), 'error');
-        resetBtn(btn);
-      }
-
-    } catch (err) {
-      showToast('Network error — please check your connection and try again.', 'error');
-      resetBtn(btn);
+      }, 50);
+    } else {
+      // LOW rating — show thank you
+      document.getElementById('feedbackForm').style.display = 'none';
+      document.getElementById('thankyouBox').style.display  = 'block';
     }
   });
 
-  function resetBtn(btn) {
-    btn.disabled = false;
-    btn.classList.remove('loading');
-    btn.querySelector('.btn-text').textContent = 'Submit Feedback';
-  }
-
   function showToast(msg, type) {
-    const box = document.getElementById('toastBox');
+    var box = document.getElementById('toastBox');
     box.textContent = msg;
     box.className = 'toast ' + type;
     box.style.display = 'block';
   }
 
   function clearToast() {
-    const box = document.getElementById('toastBox');
+    var box = document.getElementById('toastBox');
     box.style.display = 'none';
     box.textContent = '';
   }
